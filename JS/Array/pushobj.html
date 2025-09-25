@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var students = [
+        { name: "Ram", age: 15 },
+        { name: "Karan", age: 11 },
+      ];
+      students.push({ name: "Raj", age: 16 });
+      students.push({ name: "Priti", age: 17 });
+      for (var i = 0; i < students.length; i++) {
+        document.write(
+          "Name: " + students[i].name + ", Age: " + students[i].age + "<br>"
+        );
+      }
+      students.pop();
+      for (var i = 0; i < students.length; i++) {
+        document.write(
+          "Name: " + students[i].name + ", Age: " + students[i].age + "<br>"
+        );
+      }
+    </script>
+  </body>
+</html>
