@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>JS try...catch...throw...finally</h2>
+    <p id="output"></p>
+
+    <script>
+      function checkAge() {
+        try {
+          if (age < 0) {
+            //create a cutom error using throw
+            throw new Error("Age cannot be negative");
+          } else if (age < 18) {
+            throw new Error("You must be at least 18 years old");
+          } else {
+            document.getElementById("output").innerHTML = "Access Granted";
+          }
+        } catch (error) {
+          document.getElementById("output").innerHTML =
+            "Error: " + error.message;
+        } finally {
+          document.getElementById("output").innerHTML += "<br>Check Completed";
+        }
+      }
+
+      checkAge(15);
+    </script>
+  </body>
+</html>
