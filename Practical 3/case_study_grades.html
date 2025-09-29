@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Student Grading System</h2>
+    <form onsubmit="return calculatedGrade()">
+      <label for="marks">Enter Marks: </label>
+      <input type="number" id="marks" required />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      function calculatedGrade() {
+        const marks = parseFloat(document.getElementById("marks").value);
+        let result;
+
+        if (isNaN(marks) || marks < 0 || marks > 100) {
+          result = "Please enter a valid number between 0 and 100";
+        } else {
+          if (marks >= 90) {
+            result = "Grade A";
+          } else if (marks >= 75) {
+            result = "Grade B";
+          } else if (marks >= 60) {
+            result = "Grade C";
+          } else if (marks >= 40) {
+            result = "Grade D";
+          } else {
+            result = "Grade F (FAIL)";
+          }
+        }
+
+        document.getElementById("result").innerHTML = result;
+        return false;
+      }
+    </script>
+  </body>
+</html>
