@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub-Themed Portfolio</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Roboto, sans-serif;
+        transition: background 0.4s, color 0.4s;
+      }
+
+      body.dark {
+        background: #0d1117;
+        color: #c9d1d9;
+      }
+
+      body.light {
+        background: #f6f8fa;
+        color: #24292f;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        background: #161b22;
+        border-bottom: 1px solid #30363d;
+      }
+
+      header h1 {
+        color: #58a6ff;
+      }
+
+      nav a {
+        color: #58a6ff;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: 500;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: 1px solid #58a6ff;
+        color: #58a6ff;
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      section {
+        padding: 40px;
+      }
+
+      .intro {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+      }
+
+      .github-link {
+        background-color: #238636;
+        color: #fff;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .github-link:hover {
+        background-color: #2ea043;
+      }
+
+      .card {
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 20px;
+        background: #161b22;
+        margin-bottom: 15px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        border: 1px solid #30363d;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #21262d;
+        color: #58a6ff;
+      }
+
+      /* Contact Form */
+      form {
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      input,
+      textarea {
+        margin: 8px 0;
+        padding: 10px;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        background: #0d1117;
+        color: #c9d1d9;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        background-color: #58a6ff;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #1f6feb;
+      }
+
+      footer {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid #30363d;
+        font-size: 0.9em;
+        color: #8b949e;
+      }
+    </style>
+  </head>
+
+  <body class="dark">
+    <header>
+      <h1>My GitHub Portfolio</h1>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeBtn">Toggle Theme</button>
+    </header>
+
+    <section id="home">
+      <h2>👋 Welcome!</h2>
+      <p class="intro">
+        I'm an enthusiastic developer passionate about open-source and clean UI
+        design. This portfolio demonstrates localStorage, JSON handling, and
+        session persistence — all wrapped in a GitHub-inspired theme.
+      </p>
+      <a
+        href="https://github.com/aaditimenon"
+        target="_blank"
+        class="github-link"
+        >View on GitHub</a
+      >
+    </section>
+
+    <section id="projects">
+      <h2>📂 My Projects</h2>
+      <div id="projectContainer" class="card">
+        <p>Fetching project list...</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>📬 Contact Me</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea
+          id="message"
+          rows="4"
+          placeholder="Your Message"
+          required
+        ></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>© 2025 My GitHub Portfolio | Crafted with ⚙️ & 💻</p>
+    </footer>
+
+    <script>
+      // THEME SWITCHER using localStorage
+      const themeBtn = document.getElementById("themeBtn");
+      const body = document.body;
+
+      if (localStorage.getItem("theme")) {
+        body.className = localStorage.getItem("theme");
+      }
+
+      themeBtn.addEventListener("click", () => {
+        if (body.classList.contains("dark")) {
+          body.className = "light";
+          localStorage.setItem("theme", "light");
+        } else {
+          body.className = "dark";
+          localStorage.setItem("theme", "dark");
+        }
+      });
+
+      // MOCK JSON DATA (you can replace this with GitHub API)
+      const projectContainer = document.getElementById("projectContainer");
+      setTimeout(() => {
+        const projects = [
+          { name: "Portfolio Website", language: "HTML/CSS/JS", stars: 5 },
+          { name: "Weather API App", language: "JavaScript", stars: 3 },
+          { name: "Markdown Previewer", language: "React", stars: 7 },
+        ];
+
+        let table = `<table>
+      <tr><th>Project</th><th>Language</th><th>Stars</th></tr>`;
+        projects.forEach((p) => {
+          table += `<tr><td>${p.name}</td><td>${p.language}</td><td>⭐ ${p.stars}</td></tr>`;
+        });
+        table += "</table>";
+        projectContainer.innerHTML = table;
+      }, 800);
+
+      // CONTACT FORM using sessionStorage
+      const contactForm = document.getElementById("contactForm");
+      const fields = ["name", "email", "message"];
+
+      // Restore data
+      fields.forEach((f) => {
+        const value = sessionStorage.getItem(f);
+        if (value) document.getElementById(f).value = value;
+      });
+
+      // Save as user types
+      fields.forEach((f) => {
+        document.getElementById(f).addEventListener("input", (e) => {
+          sessionStorage.setItem(f, e.target.value);
+        });
+      });
+
+      // Form submission
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Message sent successfully!");
+        sessionStorage.clear();
+        contactForm.reset();
+      });
+    </script>
+  </body>
+</html>

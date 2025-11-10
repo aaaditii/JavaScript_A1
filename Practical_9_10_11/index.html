@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        transition: background 0.5s, color 0.5s;
+      }
+
+      /* Dark Theme */
+      body.dark {
+        background: #0a0f0d;
+        color: #d1f7c4;
+      }
+
+      /* Light Theme */
+      body.light {
+        background: #f5f5f5;
+        color: #222;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        border-bottom: 2px solid #1aff80;
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      header h1 {
+        color: #1aff80;
+        font-size: 1.5em;
+      }
+
+      nav a {
+        text-decoration: none;
+        margin: 0 10px;
+        color: #1aff80;
+        font-weight: 600;
+      }
+
+      nav a:hover {
+        text-shadow: 0 0 5px #1aff80;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: 2px solid #1aff80;
+        color: #1aff80;
+        padding: 5px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      section {
+        padding: 40px;
+      }
+
+      .card {
+        border: 1px solid #1aff80;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px 0;
+        background: rgba(26, 255, 128, 0.05);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        border: 1px solid #1aff80;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: rgba(26, 255, 128, 0.1);
+      }
+
+      /* Timer Styling */
+      #timer {
+        font-size: 1.5em;
+        color: #1aff80;
+        margin-top: 15px;
+      }
+
+      /* Contact Form */
+      form {
+        max-width: 400px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      input,
+      textarea {
+        margin: 8px 0;
+        padding: 10px;
+        border: 1px solid #1aff80;
+        border-radius: 6px;
+        background: transparent;
+        color: inherit;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #888;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        background-color: #1aff80;
+        color: #000;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #00cc66;
+      }
+
+      footer {
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9em;
+        border-top: 1px solid #1aff80;
+      }
+    </style>
+  </head>
+
+  <body class="dark">
+    <header>
+      <h1>Hi, Aaditi here!</h1>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="themeBtn">Toggle Theme</button>
+    </header>
+
+    <section id="home">
+      <h2>Welcome 👋</h2>
+      <div class="card">
+        <p>
+          Hello! I'm an aspiring developer passionate about web technologies and
+          python. This portfolio demonstrates localStorage, JSON handling, and
+          timers — all in one page.
+        </p>
+      </div>
+
+      <h3>Countdown Timer</h3>
+      <p id="timer"></p>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+      <div id="projectContainer" class="card">
+        <p>Loading project data...</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea
+          id="message"
+          rows="4"
+          placeholder="Your Message"
+          required
+        ></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>© 2025 My Personal Portfolio</p>
+    </footer>
+
+    <script>
+      // THEME SWITCHER using localStorage
+      const themeBtn = document.getElementById("themeBtn");
+      const body = document.body;
+
+      if (localStorage.getItem("theme")) {
+        body.className = localStorage.getItem("theme");
+      }
+
+      themeBtn.addEventListener("click", () => {
+        if (body.classList.contains("dark")) {
+          body.className = "light";
+          localStorage.setItem("theme", "light");
+        } else {
+          body.className = "dark";
+          localStorage.setItem("theme", "dark");
+        }
+      });
+
+      // JSON MOCK DATA (using setTimeout to simulate API)
+      const projectContainer = document.getElementById("projectContainer");
+
+      setTimeout(() => {
+        const data = [
+          {
+            title: "Portfolio Website",
+            tech: "HTML, CSS, JS",
+            status: "Completed",
+          },
+          {
+            title: "Context-Aware 5G-V2X",
+            tech: "Python",
+            status: "In Progress",
+          },
+          { title: "Chatbot UI", tech: "Python, Flask", status: "Completed" },
+        ];
+
+        let table = `<table>
+      <tr><th>Project</th><th>Technology</th><th>Status</th></tr>`;
+        data.forEach((p) => {
+          table += `<tr><td>${p.title}</td><td>${p.tech}</td><td>${p.status}</td></tr>`;
+        });
+        table += "</table>";
+        projectContainer.innerHTML = table;
+      }, 1000);
+
+      // COUNTDOWN TIMER
+      let countdown = 10;
+      const timerElement = document.getElementById("timer");
+      const timer = setInterval(() => {
+        timerElement.textContent = `Next update in: ${countdown}s`;
+        countdown--;
+        if (countdown < 0) {
+          clearInterval(timer);
+          timerElement.textContent = "Update complete!";
+        }
+      }, 1000);
+
+      // CONTACT FORM using sessionStorage
+      const contactForm = document.getElementById("contactForm");
+      const fields = ["name", "email", "message"];
+
+      // Restore session data
+      fields.forEach((f) => {
+        const value = sessionStorage.getItem(f);
+        if (value) document.getElementById(f).value = value;
+      });
+
+      // Save data as user types
+      fields.forEach((f) => {
+        document.getElementById(f).addEventListener("input", (e) => {
+          sessionStorage.setItem(f, e.target.value);
+        });
+      });
+
+      // Form submission
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Message sent successfully!");
+        sessionStorage.clear();
+        contactForm.reset();
+      });
+    </script>
+  </body>
+</html>
